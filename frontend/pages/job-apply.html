@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Job - Talent Jiva</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/frontend/assets/css/style.css">
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="gradient-bg text-white py-4 px-6 shadow-lg">
+    <div class="container mx-auto flex flex-wrap items-center justify-between">
+      <a href="/frontend/pages/index.html" class="text-2xl font-bold">Talent Jiva</a>
+      <div class="hidden md:flex space-x-6">
+        <a href="/frontend/pages/index.html" class="hover:text-gray-200">Home</a>
+        <a href="/frontend/pages/all-job.html" class="hover:text-gray-200">Jobs</a>
+        <a href="/frontend/pages/employer.html" class="hover:text-gray-200">Employer</a>
+        <a href="/frontend/pages/candidate.html" class="hover:text-gray-200">Job Seeker</a>
+        <a href="/frontend/pages/login.html" class="hover:text-gray-200">Login</a>
+      </div>
+      <button class="md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Job Application Section -->
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <!-- Job Overview Card -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="flex flex-col md:flex-row items-start md:items-center">
+          <img id="company-logo" src="/assets/apple-touch-icon.png" alt="Company Logo"
+            class="w-16 h-16 rounded mr-4 mb-4 md:mb-0">
+          <div>
+            <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+              <h1 id="job-title" class="text-2xl font-bold">${jobTitle}</h1>
+              <span id="job-type-badge"
+                class="mt-2 md:mt-0 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm inline-block">${jobType}</span>
+              <span id="remote-badge"
+                class="mt-2 md:mt-0 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm inline-block">${remote}</span>
+            </div>
+            <div class="mt-2 flex flex-col md:flex-row md:items-center text-gray-600">
+              <span id="company-name" class="mr-4">${companyname}</span>
+              <div class="flex items-center mt-2 md:mt-0">
+                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span id="job-location">${jobLocation}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Application Form -->
+      <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-6">Submit Your Application</h2>
+
+        <form id="job-application-form" class="space-y-6">
+          <!-- Personal Information -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Personal Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="first-name" class="block text-gray-700 mb-2">First Name *</label>
+                <input type="text" id="first-name" name="first-name" required
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="last-name" class="block text-gray-700 mb-2">Last Name *</label>
+                <input type="text" id="last-name" name="last-name" required
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="email" class="block text-gray-700 mb-2">Email Address *</label>
+                <input type="email" id="email" name="email" required
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="phone" class="block text-gray-700 mb-2">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Information -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Professional Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="current-company" class="block text-gray-700 mb-2">Current/Last Company</label>
+                <input type="text" id="current-company" name="current-company"
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="job-title" class="block text-gray-700 mb-2">Current/Last Job Title</label>
+                <input type="text" id="job-title-input" name="job-title"
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="experience" class="block text-gray-700 mb-2">Total Experience (Years) *</label>
+                <input type="number" id="experience" name="experience" min="0" step="0.5" required
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="notice-period" class="block text-gray-700 mb-2">Notice Period (Days)</label>
+                <input type="number" id="notice-period" name="notice-period" min="0"
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills and Resume -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Skills & Resume</h3>
+            <div class="space-y-6">
+              <div>
+                <label for="skills" class="block text-gray-700 mb-2">Key Skills *</label>
+                <textarea id="skills" name="skills" rows="3" required
+                  class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="e.g., AWS, MongoDB, SQL"></textarea>
+              </div>
+              <div>
+                <label for="resume" class="block text-gray-700 mb-2">Upload Resume (PDF, DOC, DOCX) *</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                  <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required class="hidden">
+                  <label for="resume" class="cursor-pointer">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                      <path
+                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="mt-1 text-sm text-gray-600">Click to upload or drag and drop</p>
+                    <p class="mt-1 text-xs text-gray-500">Maximum file size: 5MB</p>
+                  </label>
+                  <p id="file-name" class="mt-2 text-sm text-gray-600"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cover Letter -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Cover Letter</h3>
+            <div>
+              <label for="cover-letter" class="block text-gray-700 mb-2">Why are you a good fit for this role?
+                (Optional)</label>
+              <textarea id="cover-letter" name="cover-letter" rows="5"
+                class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Describe why you're interested in this position and how your skills and experience make you a strong candidate..."></textarea>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-4">
+            <button type="submit"
+              class="w-full gradient-bg text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-all">
+              Submit Application
+            </button>
+            <p class="text-center text-gray-500 mt-4 text-sm">
+              By submitting this application, you agree to our <a href="#"
+                class="text-blue-600 hover:underline">Terms</a> and <a href="#"
+                class="text-blue-600 hover:underline">Privacy Policy</a>.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white mt-12">
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Talent Jiva</h3>
+          <p class="text-gray-400">Find your dream job or hire the perfect candidate. Talent Jiva connects talented
+            professionals with amazing opportunities.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">For Job Seekers</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">Browse Jobs</a></li>
+            <li><a href="#" class="hover:text-white">Create Resume</a></li>
+            <li><a href="#" class="hover:text-white">Job Alerts</a></li>
+            <li><a href="#" class="hover:text-white">Career Advice</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">For Employers</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">Post a Job</a></li>
+            <li><a href="#" class="hover:text-white">Search Resumes</a></li>
+            <li><a href="#" class="hover:text-white">Recruiting Solutions</a></li>
+            <li><a href="#" class="hover:text-white">Pricing Plans</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Contact Us</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li>Email: support@talentjiva.com</li>
+            <li>Phone: 6370266785</li>
+            <li>Address: Jyoti Vihar, Burla</li>
+            <li>Sambalpur, 768019</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2024 Talent Jiva. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/frontend/assets/js/job-apply.js"></script>
+  <script src="/frontend/assets/js/auth.js"></script>
+  <script src="/frontend/assets/js/script.js"></script>
+</body>
+
+</html>

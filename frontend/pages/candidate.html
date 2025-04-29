@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Dashboard - Talent Jiva</title>
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/frontend/assets/images/mukhdu_swgt.png" alt="Profile" class="profile-image">
+                <h3 class="user-name">Swagat Sahu</h3>
+                <p class="user-title">Frontend Developer</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="/frontend/pages/all-job.html">
+                    <i class="fas fa-search"></i> Job Search
+                </a>
+                <a href="/frontend/pages/candidate-application.html">
+                    <i class="fas fa-file-alt"></i> My Applications
+                </a>
+                <a href="#">
+                    <i class="fas fa-bookmark"></i> Saved Jobs
+                </a>
+                <a href="#">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <a href="#>
+                    <i class=" fas fa-file-pdf"></i> Resume
+                </a>
+                <a href="#">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="" id="logoutBtn" class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Stats Cards -->
+                <div class="stats-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 id="appliedJobs">12</h3>
+                        <p>Applied Jobs</p>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 id="profileViews">69</h3>
+                        <p>Profile Views</p>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 id="savedJobs">8</h3>
+                        <p>Saved Jobs</p>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <div class="content-card applications-card">
+                    <div class="card-header">
+                        <h2>Recent Applications</h2>
+                        <a href="/candidate/applications" class="view-all">View All</a>
+                    </div>
+                    <div class="applications-list">
+                        <div class="application-item">
+                            <img src="/frontend/assets/images/tjcompany.png" alt="Company">
+                            <div class="application-details">
+                                <h3>Senior Frontend Developer</h3>
+                                <p class="company-name">TJ Company Ltd.</p>
+                                <div class="application-meta">
+                                    <span class="location"><i class="fas fa-map-marker-alt"></i> Bhubaneswar,
+                                        India</span>
+                                    <span class="salary"><i class="fas fa-dollar-sign"></i> ₹120K - ₹150K</span>
+                                </div>
+                                <span class="status pending">Under Review</span>
+                            </div>
+                            <div class="application-date">
+                                Applied 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Jobs -->
+                <div class="content-card recommended-jobs">
+                    <div class="card-header">
+                        <h2>Recommended Jobs</h2>
+                        <a href="/candidate/job-search" class="view-all">View All</a>
+                    </div>
+                    <div class="jobs-list">
+                        <div class="job-item">
+                            <div class="job-details">
+                                <div class="job-title-section">
+                                    <h3>Full Stack Developer</h3>
+                                    <button class="save-job-btn" data-job-id="123">
+                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                </div>
+                                <p class="company">Byte Story</p>
+                                <div class="job-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> Bangaluru, India</span>
+                                    <span><i class="fas fa-dollar-sign"></i> ₹100K - ₹130K</span>
+                                    <span><i class="fas fa-clock"></i> Full-time</span>
+                                </div>
+                                <div class="tags">
+                                    <span>React</span>
+                                    <span>Node.js</span>
+                                    <span>MongoDB</span>
+                                </div>
+                            </div>
+                            <button class="apply-btn" data-job-id="123">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Completion -->
+                <div class="content-card profile-completion">
+                    <div class="card-header">
+                        <h2>Profile Completion</h2>
+                        <span class="completion-percentage">75%</span>
+                    </div>
+                    <div class="completion-progress">
+                        <div class="progress-bar" style="width: 75%"></div>
+                    </div>
+                    <div class="completion-tasks">
+                        <div class="task completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Basic Information</span>
+                        </div>
+                        <div class="task completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Resume Upload</span>
+                        </div>
+                        <div class="task">
+                            <i class="fas fa-circle"></i>
+                            <span>Skills Assessment</span>
+                        </div>
+                        <div class="task">
+                            <i class="fas fa-circle"></i>
+                            <span>Portfolio Links</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/frontend/assets/js/auth.js"></script>
+    <script src="/frontend/assets/js/enhanced-auth.js"></script>
+</body>
+
+</html>

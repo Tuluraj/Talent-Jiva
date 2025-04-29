@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - Talent Jiva</title>
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/frontend/assets/images/tjcompany.png" alt="Company" class="company-logo">
+                <h3 class="company-name">TJ Company Ltd.</h3>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/frontend/pages/employer.html" class="active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="/frontend/pages/posted-job.html">
+                    <i class="fas fa-briefcase"></i> Posted Jobs
+                </a>
+                <a href="/frontend/pages/employer-application.html">
+                    <i class="fas fa-users"></i> Applications
+                </a>
+                <a href="/frontend/pages/post-job.html">
+                    <i class="fas fa-plus-circle"></i> Post New Job
+                </a>
+                <a href="/frontend/pages/404-error.html">
+                    <i class="fas fa-building"></i> Company Profile
+                </a>
+                <a href="/frontend/pages/404-error.html">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="#" id="logoutBtn" class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Stats Cards -->
+                <div class="stats-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 id="totalApplications">156</h3>
+                        <p>Total Applications</p>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 id="activeJobs">12</h3>
+                        <p>Active Jobs</p>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 id="totalViews">1,234</h3>
+                        <p>Total Job Views</p>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <div class="content-card applications-card">
+                    <div class="card-header">
+                        <h2>Recent Applications</h2>
+                        <a href="/employer/applications" class="view-all">View All</a>
+                    </div>
+                    <div class="applications-list">
+                        <!-- Application items will be dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Active Jobs -->
+                <div class="content-card active-jobs">
+                    <div class="card-header">
+                        <h2>Active Job Listings</h2>
+                        <a href="/frontend/pages/posted-job.html" class="view-all">View All</a>
+                    </div>
+                    <div class="jobs-list">
+                        <!-- Job items will be dynamically populated -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/frontend/assets/js/script.js"></script>
+    <script src="/frontend/assets/js/auth.js"></script>
+    <!-- <script src="/frontend/assets/js/enhanced-auth.js"></script> -->
+
+</body>
+
+</html>

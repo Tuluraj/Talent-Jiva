@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Details - Talent Jiva</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/frontend/assets/css/style.css">
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="gradient-bg text-white py-4 px-6 shadow-lg">
+    <div class="container mx-auto flex flex-wrap items-center justify-between">
+      <a href="/frontend/pages/index.html" class="text-2xl font-bold">Talent Jiva</a>
+      <div class="hidden md:flex space-x-6">
+        <a href="/frontend/pages/index.html" class="hover:text-gray-200">Home</a>
+        <a href="/frontend/pages/all-job.html" class="hover:text-gray-200">Jobs</a>
+        <a href="/frontend/pages/login.html" class="hover:text-gray-200">Login</a>
+      </div>
+      <button class="md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Job Details Section -->
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+        <!-- Job Header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 pb-6 border-b">
+          <div class="flex items-center mb-4 md:mb-0">
+            <img id="company-logo" src="/frontend/assets/images/company-default.jpeg" alt="Company Logo"
+              class="w-16 h-16 rounded mr-4">
+            <div>
+              <h1 id="job-title" class="text-2xl font-bold">Back-end Developer</h1>
+              <p id="company-name" class="text-lg text-gray-600">Byte Story Co.</p>
+            </div>
+          </div>
+          <div>
+            <a href="job-apply.html" id="apply-link"
+              class="inline-block gradient-bg text-white px-6 py-3 rounded-lg hover:opacity-90 transition-all">
+              Apply Now
+            </a>
+          </div>
+        </div>
+
+        <!-- Job Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="p-4 border rounded-lg">
+            <h3 class="font-semibold text-gray-700 mb-2">Job Type</h3>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span id="job-type">Full-time</span>
+            </div>
+          </div>
+          <div class="p-4 border rounded-lg">
+            <h3 class="font-semibold text-gray-700 mb-2">Location</h3>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span id="job-location">Sambalpur</span>
+              <span id="remote-badge"
+                class="ml-2 px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Remote</span>
+            </div>
+          </div>
+          <div class="p-4 border rounded-lg">
+            <h3 class="font-semibold text-gray-700 mb-2">Salary Range</h3>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span id="salary-range">₹80k - ₹100k</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4">Experience Required</h3>
+          <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+            <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span id="experience-required" class="text-gray-700">2-3 years</span>
+          </div>
+        </div>
+
+        <!-- Skills/Tags -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4">Required Skills</h3>
+          <div id="skills-container" class="flex flex-wrap gap-2">
+            <span class="px-3 py-2 bg-blue-100 text-blue-800 rounded-lg">AWS</span>
+            <span class="px-3 py-2 bg-blue-100 text-blue-800 rounded-lg">MongoDB</span>
+            <span class="px-3 py-2 bg-blue-100 text-blue-800 rounded-lg">SQL</span>
+          </div>
+        </div>
+
+        <!-- Job Description -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4">Job Description</h3>
+          <div class="prose max-w-none">
+            <p id="job-description" class="text-gray-700 leading-relaxed">
+              We are looking for a Back-end Developer with experience in AWS, MongoDB, and SQL. The ideal candidate will
+              have 2-3 years of experience and be able to work in a fast-paced environment. Remote work is available.
+            </p>
+          </div>
+        </div>
+
+        <!-- Apply Button (Bottom) -->
+        <div class="text-center mt-8">
+          <a href="job-apply.html" id="apply-link-bottom"
+            class="inline-block gradient-bg text-white px-8 py-3 rounded-lg hover:opacity-90 transition-all">
+            Apply for this Position
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Similar Jobs Section -->
+  <section class="py-12 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-6">Similar Job Positions</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="similar-jobs-container">
+        <!-- Similar job cards will be loaded dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white mt-12">
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Talent Jiva</h3>
+          <p class="text-gray-400">Find your dream job or hire the perfect candidate. Talent Jiva connects talented
+            professionals with amazing opportunities.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">For Job Seekers</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">Browse Jobs</a></li>
+            <li><a href="#" class="hover:text-white">Create Resume</a></li>
+            <li><a href="#" class="hover:text-white">Job Alerts</a></li>
+            <li><a href="#" class="hover:text-white">Career Advice</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">For Employers</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">Post a Job</a></li>
+            <li><a href="#" class="hover:text-white">Search Resumes</a></li>
+            <li><a href="#" class="hover:text-white">Recruiting Solutions</a></li>
+            <li><a href="#" class="hover:text-white">Pricing Plans</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Contact Us</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li>Email: support@talentjiva.com</li>
+            <li>Phone: 6370266785</li>
+            <li>Address: Jyoti Vihar, Burla</li>
+            <li>Sambalpur, 768019</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2024 Talent Jiva. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/frontend/assets/js/job-details.js"></script>
+  <script src="/frontend/assets/js/auth.js"></script>
+</body>
+
+</html>

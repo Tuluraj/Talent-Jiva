@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Applications - Talent Jiva</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="gradient-bg text-white py-4 px-6 shadow-lg">
+    <div class="container mx-auto flex flex-wrap items-center justify-between">
+      <a href="/frontend/pages/index.html" class="text-2xl font-bold">Talent Jiva</a>
+      <div class="hidden md:flex space-x-6">
+        <a href="/frontend/pages/candidate.html" class="hover:text-gray-200">Dashboard</a>
+        <a href="/frontend/pages/all-job.html" class="hover:text-gray-200">Jobs</a>
+        <a href="/frontend/pages/candidate-applications.html" class="hover:text-gray-200 underline">My Applications</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- My Applications Section -->
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">My Applications</h2>
+        <a href="/frontend/pages/all-job.html" class="gradient-bg text-white px-6 py-2 rounded hover:opacity-90">
+          <i class="fas fa-search mr-2"></i>Browse Jobs
+        </a>
+      </div>
+
+      <!-- Filter and Search -->
+      <div class="bg-white p-4 rounded-lg shadow mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="relative w-full md:w-1/3">
+            <input type="text" id="application-search" placeholder="Search by job title or company..."
+              class="w-full pl-10 pr-4 py-2 border rounded">
+            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+          </div>
+          <div class="flex flex-wrap gap-2 w-full md:w-auto">
+            <select id="status-filter" class="border rounded px-3 py-2 text-gray-700">
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="reviewed">Reviewed</option>
+              <option value="interviewed">Interviewed</option>
+              <option value="accepted">Accepted</option>
+              <option value="rejected">Rejected</option>
+            </select>
+            <select id="sort-by" class="border rounded px-3 py-2 text-gray-700">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="company">Company (A-Z)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Applications List -->
+      <div id="applications-container" class="space-y-4">
+        <!-- Loading State -->
+        <div id="loading-indicator" class="text-center py-8">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-blue-600"></div>
+          <p class="mt-2 text-gray-600">Loading your applications...</p>
+        </div>
+
+        <!-- No Applications Message (initially hidden) -->
+        <div id="no-applications-message" class="hidden bg-white p-8 text-center rounded-lg shadow">
+          <i class="fas fa-file-alt text-gray-400 text-5xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">You haven't applied to any jobs yet</h3>
+          <p class="text-gray-600 mb-4">Start your career journey by applying to open positions.</p>
+          <a href="/frontend/pages/all-job.html" class="gradient-bg text-white px-6 py-2 rounded hover:opacity-90">
+            Browse Available Jobs
+          </a>
+        </div>
+
+        <!-- Application Cards (For Static Display) -->
+        <div class="application-card bg-white rounded-lg shadow overflow-hidden">
+          <div class="p-6">
+            <div class="flex flex-col md:flex-row justify-between">
+              <!-- Application Info -->
+              <div class="flex-1">
+                <div class="flex items-center mb-2">
+                  <h3 class="text-xl font-bold text-gray-800 mr-3">Senior Frontend Developer</h3>
+                  <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                </div>
+                <div class="mb-4">
+                  <span class="text-gray-700 font-medium">Talent Jiva Tech</span>
+                  <span class="mx-2">•</span>
+                  <span class="text-gray-700">Bangalore, India</span>
+                  <span class="mx-2">•</span>
+                  <span class="text-gray-700">Full-time</span>
+                </div>
+                <p class="text-gray-600 mb-4">We are looking for a skilled Frontend Developer with experience in React
+                  and modern JavaScript frameworks.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">React</span>
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">JavaScript</span>
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">CSS</span>
+                </div>
+                <div class="flex items-center text-gray-500 text-sm">
+                  <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> Applied on Apr 15, 2025</span>
+                  <span class="mr-4"><i class="far fa-clock mr-1"></i> 12 days ago</span>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex flex-row md:flex-col justify-start gap-2 mt-4 md:mt-0 md:ml-4">
+                <a href="#" class="view-application-btn text-blue-600 hover:text-blue-800 w-full text-right">
+                  <i class="fas fa-eye"></i> View
+                </a>
+                <button class="download-resume-btn text-green-600 hover:text-green-800 w-full text-right">
+                  <i class="fas fa-download"></i> Resume
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="application-card bg-white rounded-lg shadow overflow-hidden">
+          <div class="p-6">
+            <div class="flex flex-col md:flex-row justify-between">
+              <!-- Application Info -->
+              <div class="flex-1">
+                <div class="flex items-center mb-2">
+                  <h3 class="text-xl font-bold text-gray-800 mr-3">Backend Developer</h3>
+                  <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Reviewed</span>
+                </div>
+                <div class="mb-4">
+                  <span class="text-gray-700 font-medium">ByteStory Solutions</span>
+                  <span class="mx-2">•</span>
+                  <span class="text-gray-700">Hyderabad, India</span>
+                  <span class="mx-2">•</span>
+                  <span class="text-gray-700">Full-time</span>
+                </div>
+                <p class="text-gray-600 mb-4">Join our team of skilled backend developers working on large-scale
+                  distributed systems.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Node.js</span>
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">MongoDB</span>
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">API Design</span>
+                </div>
+                <div class="flex items-center text-gray-500 text-sm">
+                  <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> Applied on Apr 5, 2025</span>
+                  <span class="mr-4"><i class="far fa-clock mr-1"></i> 22 days ago</span>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex flex-row md:flex-col justify-start gap-2 mt-4 md:mt-0 md:ml-4">
+                <a href="#" class="view-application-btn text-blue-600 hover:text-blue-800 w-full text-right">
+                  <i class="fas fa-eye"></i> View
+                </a>
+                <button class="download-resume-btn text-green-600 hover:text-green-800 w-full text-right">
+                  <i class="fas fa-download"></i> Resume
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="application-card bg-white rounded-lg shadow overflow-hidden">
+          <div class="p-6">
+            <div class="flex flex-col md:flex-row justify-between">
+              <!-- Application Info -->
+              <div class="flex-1">
+                <div class="flex items-center mb-2">
+                  <h3 class="text-xl font-bold text-gray-800 mr-3">UI/UX Designer</h3>
+                  <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Accepted</span>
+                </div>
+                <div class="mb-4">
+                  <span class="text-gray-700 font-medium">Design Wizards</span>
+                  <span class="mx-2">•</span>
+                  <span class="text-gray-700">Remote</span>
+                  <span class="mx-2">•</span>
+                  <span class="text-gray-700">Contract</span>
+                </div>
+                <p class="text-gray-600 mb-4">Looking for a creative UI/UX designer to join our team for a 6-month
+                  contract project.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Figma</span>
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">UI Design</span>
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Prototyping</span>
+                </div>
+                <div class="flex items-center text-gray-500 text-sm">
+                  <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> Applied on Mar 20, 2025</span>
+                  <span class="mr-4"><i class="far fa-clock mr-1"></i> 38 days ago</span>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex flex-row md:flex-col justify-start gap-2 mt-4 md:mt-0 md:ml-4">
+                <a href="#" class="view-application-btn text-blue-600 hover:text-blue-800 w-full text-right">
+                  <i class="fas fa-eye"></i> View
+                </a>
+                <button class="download-resume-btn text-green-600 hover:text-green-800 w-full text-right">
+                  <i class="fas fa-download"></i> Resume
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div id="pagination" class="flex justify-center mt-8 space-x-2">
+        <button class="px-3 py-1 rounded border bg-gray-200 text-gray-700">1</button>
+        <button class="px-3 py-1 rounded border text-gray-700 hover:bg-gray-100">2</button>
+        <button class="px-3 py-1 rounded border text-gray-700 hover:bg-gray-100">3</button>
+        <span class="px-3 py-1">...</span>
+        <button class="px-3 py-1 rounded border text-gray-700 hover:bg-gray-100">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Detail Modal -->
+  <div id="application-detail-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-90vh overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 pb-4 border-b">
+        <h3 class="text-2xl font-bold">Application Details</h3>
+        <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="application-detail-content">
+        <!-- Content will be populated by JavaScript -->
+      </div>
+      <div class="mt-6 pt-4 border-t flex justify-end">
+        <button id="close-detail-btn" class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6 mt-12">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2025 Talent Jiva. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Placeholder JavaScript for static page
+    document.addEventListener('DOMContentLoaded', function () {
+      // Hide loading indicator
+      document.getElementById('loading-indicator').style.display = 'none';
+
+      // For the view buttons
+      const viewButtons = document.querySelectorAll('.view-application-btn');
+      viewButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.getElementById('application-detail-modal').classList.remove('hidden');
+        });
+      });
+
+      // Close modal buttons
+      document.getElementById('close-modal').addEventListener('click', function () {
+        document.getElementById('application-detail-modal').classList.add('hidden');
+      });
+
+      document.getElementById('close-detail-btn').addEventListener('click', function () {
+        document.getElementById('application-detail-modal').classList.add('hidden');
+      });
+    });
+  </script>
+  <script src="/frontend/assets/js/candidate-application.js"></script>
+  <script src="/frontend/assets/js/auth.js"></script>
+</body>
+
+</html>

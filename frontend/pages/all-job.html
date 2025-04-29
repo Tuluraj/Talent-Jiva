@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Jobs - Talent Jiva</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="/CSS/style.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a4f8b 0%, #2d71b5 100%);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .custom-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .skeleton {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            background-color: #e5e7eb;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white py-4 px-6 shadow-lg">
+        <div class="container mx-auto flex flex-wrap items-center justify-between">
+            <a href="/frontend/pages/index.html" class="text-2xl font-bold">Talent Jiva</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="/frontend/pages/index.html" class="hover:text-gray-200">Home</a>
+                <a href="/frontend/pages/employer.html" class="hover:text-gray-200">Employer</a>
+                <a href="/frontend/pages/candidate.html" class="hover:text-gray-200">Job Seeker</a>
+                <a href="/frontend/pages/login.html" class="hover:text-gray-200" id="login-link">Login</a>
+                <a href="#" class="hover:text-gray-200 hidden" id="dashboard-link">Dashboard</a>
+                <a href="#" class="hover:text-gray-200 hidden" id="logout-link">Logout</a>
+            </div>
+            <button class="md:hidden mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div class="hidden mobile-menu md:hidden mt-4 space-y-2">
+            <a href="/frontend/pages/index.html" class="block py-2 px-4 hover:bg-blue-700">Home</a>
+            <a href="/frontend/pages/employer.html" class="block py-2 px-4 hover:bg-blue-700">Employer</a>
+            <a href="/frontend/pages/candidate.html" class="block py-2 px-4 hover:bg-blue-700">Job Seeker</a>
+            <a href="/frontend/pages/login.html" class="block py-2 px-4 hover:bg-blue-700"
+                id="mobile-login-link">Login</a>
+            <a href="#" class="block py-2 px-4 hover:bg-blue-700 hidden" id="mobile-dashboard-link">Dashboard</a>
+            <a href="#" class="block py-2 px-4 hover:bg-blue-700 hidden" id="mobile-logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="bg-white shadow-md py-8">
+        <div class="container mx-auto px-4">
+            <form class="jobs-search-form grid md:grid-cols-3 gap-4">
+                <div>
+                    <input type="text" placeholder="Job title or keyword"
+                        class="w-full p-3 border rounded text-gray-800 placeholder-gray-500" />
+                </div>
+                <div>
+                    <input type="text" placeholder="Location"
+                        class="w-full p-3 border rounded text-gray-800 placeholder-gray-500" />
+                </div>
+                <div>
+                    <button type="submit" class="w-full gradient-bg text-white p-3 rounded hover:opacity-90">
+                        Search Jobs
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Filters and Jobs Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold">Available Jobs</h2>
+                    <p class="text-gray-600" id="job-count">Loading jobs...</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <select id="sort-select" class="p-2 border rounded text-gray-800 bg-white">
+                        <option value="recent">Most Recent</option>
+                        <option value="salary-high">Highest Salary</option>
+                        <option value="salary-low">Lowest Salary</option>
+                        <option value="title-az">Job Title (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- Filters Sidebar -->
+                    <div class="bg-white p-6 rounded-lg shadow-md h-fit">
+                        <h3 class="text-xl font-bold mb-4">Filters</h3>
+
+                        <!-- Job Type Filter -->
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-3">Job Type</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Full-time">
+                                    Full-time
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Part-time">
+                                    Part-time
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Contract">
+                                    Contract
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Internship">
+                                    Internship
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Experience Level Filter -->
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-3">Experience Level</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Entry">
+                                    Entry Level
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Mid">
+                                    Mid Level
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Senior">
+                                    Senior Level
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Remote Filter -->
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-3">Remote Options</h4>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" id="remote-only">
+                                Remote Only
+                            </label>
+                        </div>
+
+                        <!-- Clear Filters Button -->
+                        <button onclick="clearSearch()"
+                            class="w-full mt-4 border border-blue-600 text-blue-600 p-2 rounded hover:bg-blue-50">
+                            Clear All Filters
+                        </button>
+                    </div>
+
+                    <!-- Jobs Grid -->
+                    <div class="lg:col-span-3">
+                        <div class="jobs-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Job cards will be dynamically inserted here -->
+                            <!-- Loading Skeleton -->
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <div class="flex justify-between mb-4">
+                                    <div class="w-3/4">
+                                        <div class="h-6 skeleton rounded w-3/4 mb-2"></div>
+                                        <div class="h-4 skeleton rounded w-1/2"></div>
+                                    </div>
+                                    <div class="w-6 h-6 skeleton rounded-full"></div>
+                                </div>
+                                <div class="flex gap-2 mb-4">
+                                    <div class="flex gap-2 mb-4">
+                                        <div class="h-6 skeleton rounded-full w-20"></div>
+                                        <div class="h-6 skeleton rounded-full w-24"></div>
+                                    </div>
+                                    <div class="h-4 skeleton rounded w-full mb-2"></div>
+                                    <div class="h-4 skeleton rounded w-3/4 mb-4"></div>
+                                    <div class="flex gap-2 mb-4">
+                                        <div class="h-6 skeleton rounded w-16"></div>
+                                        <div class="h-6 skeleton rounded w-16"></div>
+                                    </div>
+                                    <div class="flex justify-between items-center mb-4">
+                                        <div class="h-5 skeleton rounded w-16"></div>
+                                        <div class="h-4 skeleton rounded w-32"></div>
+                                    </div>
+                                    <div class="pt-4 border-t flex justify-between">
+                                        <div class="h-6 skeleton rounded w-24"></div>
+                                        <div class="h-8 skeleton rounded w-24"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-lg shadow-md p-6">
+                                    <div class="flex justify-between mb-4">
+                                        <div class="w-3/4">
+                                            <div class="h-6 skeleton rounded w-3/4 mb-2"></div>
+                                            <div class="h-4 skeleton rounded w-1/2"></div>
+                                        </div>
+                                        <div class="w-6 h-6 skeleton rounded-full"></div>
+                                    </div>
+                                    <div class="flex gap-2 mb-4">
+                                        <div class="h-6 skeleton rounded-full w-20"></div>
+                                        <div class="h-6 skeleton rounded-full w-24"></div>
+                                    </div>
+                                    <div class="h-4 skeleton rounded w-full mb-2"></div>
+                                    <div class="h-4 skeleton rounded w-3/4 mb-4"></div>
+                                    <div class="flex gap-2 mb-4">
+                                        <div class="h-6 skeleton rounded w-16"></div>
+                                        <div class="h-6 skeleton rounded w-16"></div>
+                                    </div>
+                                    <div class="flex justify-between items-center mb-4">
+                                        <div class="h-5 skeleton rounded w-16"></div>
+                                        <div class="h-4 skeleton rounded w-32"></div>
+                                    </div>
+                                    <div class="pt-4 border-t flex justify-between">
+                                        <div class="h-6 skeleton rounded w-24"></div>
+                                        <div class="h-8 skeleton rounded w-24"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="mt-12 flex justify-center">
+                        <nav class="inline-flex rounded-md shadow pagination">
+                            <button data-action="prev"
+                                class="pagination-btn px-4 py-2 rounded-l-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+                                Previous
+                            </button>
+                            <button data-action="page" data-page="1"
+                                class="pagination-btn px-4 py-2 border-t border-b border-gray-300 bg-blue-600 text-white">
+                                1
+                            </button>
+                            <button data-action="next"
+                                class="pagination-btn px-4 py-2 rounded-r-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+                                Next
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Talent Jiva</h3>
+                    <p class="text-gray-400">
+                        Connecting top talent with the best opportunities.
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497-3.753C20.18 7.773 21.692 5.25 22 4.009z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M16.98 0a6.9 6.9 0 0 1 5.08 1.98A6.94 6.94 0 0 1 24 7.02v9.96c0 2.08-.68 3.87-1.98 5.13A7.14 7.14 0 0 1 16.94 24H7.06a7.06 7.06 0 0 1-5.03-1.89A6.96 6.96 0 0 1 0 16.94V7.02C0 2.8 2.8 0 7.02 0h9.96zm.05 2.23H7.06c-1.45 0-2.7.43-3.53 1.25a4.82 4.82 0 0 0-1.3 3.54v9.92c0 1.5.43 2.7 1.3 3.58a5 5 0 0 0 3.53 1.25h9.88a5 5 0 0 0 3.53-1.25 4.73 4.73 0 0 0 1.4-3.54V7.02a5 5 0 0 0-1.3-3.49 4.82 4.82 0 0 0-3.54-1.3zM12 5.76c3.39 0 6.2 2.8 6.2 6.2a6.2 6.2 0 0 1-12.4 0 6.2 6.2 0 0 1 6.2-6.2zm0 2.22a3.99 3.99 0 0 0-3.97 3.97A3.99 3.99 0 0 0 12 15.92a3.99 3.99 0 0 0 3.97-3.97A3.99 3.99 0 0 0 12 7.98zm6.44-3.77a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h4.735c-.276-.837-.659-1.889-.748-2.124-.16-.427-.407-1.557-.586-2.738-.299-1.918-.409-3.055-.409-3.914 0-1.119.501-2.19 1.331-2.819.516-.39 1.129-.58 1.819-.58.961 0 1.736.515 2.094 1.392.162.396.246.886.246 1.446 0 .338-.036.798-.11 1.381-.072.582-.177 1.137-.313 1.662-.135.526-.271.982-.407 1.367-.136.387-.258.649-.367.789-.109.14-.208.21-.299.21-.245 0-.375-.34-.375-1.02 0-.113.017-.339.052-.677s.067-.582.095-.74c.029-.157.052-.412.072-.763.021-.35.031-.629.031-.836 0-.813-.174-1.491-.518-2.033-.344-.542-.885-.814-1.623-.814-.958 0-1.757.374-2.399 1.118-.641.745-.962 1.69-.962 2.835 0 .246.018.48.052.698.034.218.09.419.167.602.077.183.144.323.198.417.055.095.136.21.241.343.106.134.169.233.191.299.021.066.042.189.063.37.021.183-.021.307-.126.371-.105.066-.267.157-.487.273-.061 1.172-.111 1.964-.152 2.376-.04.412-.126 1.022-.257 1.83-.131.807-.235 1.333-.313 1.576h4.382c2.76 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-4.2 19.834c-.039-.047-.137-.158-.293-.336-.156-.175-.241-.292-.257-.347-.016-.054.005-.081.063-.081.341 0 .702-.125 1.082-.375.38-.249.732-.562 1.055-.937.323-.375.594-.804.814-1.289.219-.484.33-.987.33-1.509 0-.807-.136-1.549-.409-2.227-.273-.679-.677-1.258-1.213-1.738-.536-.481-1.176-.857-1.923-1.13-.747-.271-1.576-.407-2.487-.407-.96 0-1.856.159-2.685.478-.831.318-1.551.766-2.16 1.343-.609.578-1.088 1.278-1.435 2.102s-.525 1.734-.525 2.718c0 .855.104 1.634.314 2.337.209.703.516 1.304.921 1.803.405.5.902.898 1.491 1.191.588.294 1.262.478 2.022.55.761.074 1.576.04 2.446-.099.328-.047.532-.114.614-.199.082-.086.155-.25.22-.494.063-.245.146-.411.246-.499.101-.089.3-.089.598 0 .136.046.348.232.635.56.288.328.455.576.5.747.047.17-.016.32-.188.452-.49.379-1.11.685-1.859.917-.75.234-1.504.35-2.265.35-1.354 0-2.558-.284-3.611-.854-1.054-.568-1.879-1.354-2.472-2.355-.594-1-1.011-2.178-1.249-3.529-.238-1.353-.357-2.799-.357-4.337 0-1.538.28-2.959.839-4.263.559-1.303 1.338-2.423 2.339-3.361 1-0.935 2.271-1.621 3.361-2.131 1.086-.512 2.2-.767 3.34-.767 1.308 0 2.503.225 3.587.676 1.083.451 2.007 1.077 2.771 1.883.764.804 1.345 1.756 1.744 2.857.398 1.1.597 2.29.597 3.566 0 1.353-.298 2.578-.894 3.674s-1.312 1.99-2.149 2.669c-.836.678-1.708 1.018-2.614 1.018-1.021 0-1.552-.446-1.599-1.343.006-.044.008-.093.008-.145 0-.17-.002-.293-.008-.371-.005-.079-.008-.223-.008-.431 0-.208.081-.522.244-.942.162-.421.304-.76.424-1.018.12-.258.286-.579.493-.964.208-.386.316-.731.317-1.035.002-.304-.175-.545-.528-.725-.353-.18-.711-.271-1.075-.271-.708 0-1.264.3-1.668.901-.405.601-.607 1.371-.607 2.312 0 .547.059 1.015.176 1.401.118.387.22.704.31.951.09.246.196.584.315 1.009.117.424.182.726.19.904.01.178-.028.367-.107.571l-.255 1.113z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">For Employers</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Post a Job</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Browse Candidates</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing Plans</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Recruitment Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">For Job Seekers</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Find Jobs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Create Resume</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Job Alerts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Career Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-1 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="text-gray-400">123 Job Street, Employment City</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-1 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span class="text-gray-400">info@talentjiva.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-1 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <span class="text-gray-400">+1 (555) 123-4567</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 Talent Jiva. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification"
+        class="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded shadow-lg transform transition-all duration-500 translate-y-20 opacity-0">
+        Notification message
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function () {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+    <script src="/frontend/assets/js/auth.js"></script>
+    <script src="/frontend/assets/js/enhanced-auth.js"></script>
+    <script src="/frontend/assets/js/all-job.js"></script>
+</body>
+
+</html>

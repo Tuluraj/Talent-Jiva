@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Talent Jiva</title>
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h1>Talent Jiva</h1>
+                <p>Admin Panel</p>
+            </div>
+
+            <nav class="admin-nav">
+                <div class="nav-section">
+                    <h3>Main</h3>
+                    <a href="/admin/dashboard" class="active">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                    <a href="/admin/analytics">
+                        <i class="fas fa-chart-bar"></i> Analytics
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Management</h3>
+                    <a href="/admin/users">
+                        <i class="fas fa-users"></i> Users
+                    </a>
+                    <a href="/admin/jobs">
+                        <i class="fas fa-briefcase"></i> Jobs
+                    </a>
+                    <a href="/admin/companies">
+                        <i class="fas fa-building"></i> Companies
+                    </a>
+                    <a href="/admin/reports">
+                        <i class="fas fa-flag"></i> Reports
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Settings</h3>
+                    <a href="/admin/settings">
+                        <i class="fas fa-cog"></i> Site Settings
+                    </a>
+                    <a href="/admin/profile">
+                        <i class="fas fa-user-shield"></i> Admin Profile
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="header-actions">
+                    <button class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">5</span>
+                    </button>
+                    <div class="admin-profile">
+                        <img src="assets/images/admin-avatar.png" alt="Admin">
+                        <div class="admin-info">
+                            <p class="name">Admin User</p>
+                            <p class="role">Super Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Overview Cards -->
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="card-icon users">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Total Users</h3>
+                            <p class="number">1,234</p>
+                            <p class="growth positive">+12% this month</p>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon jobs">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Active Jobs</h3>
+                            <p class="number">456</p>
+                            <p class="growth positive">+8% this month</p>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon applications">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Applications</h3>
+                            <p class="number">2,567</p>
+                            <p class="growth positive">+15% this month</p>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon revenue">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Revenue</h3>
+                            <p class="number">$45,678</p>
+                            <p class="growth positive">+20% this month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Approvals -->
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2>Pending Approvals</h2>
+                        <button class="view-all">View All</button>
+                    </div>
+                    <div class="approval-list">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Email</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="assets/images/user1.png" alt="User">
+                                            <span>John Smith</span>
+                                        </div>
+                                    </td>
+                                    <td>Recruiter</td>
+                                    <td>john@company.com</td>
+                                    <td>2024-01-12</td>
+                                    <td>
+                                        <button class="approve-btn">Approve</button>
+                                        <button class="reject-btn">Reject</button>
+                                    </td>
+                                </tr>
+                                <!-- More rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2>Recent Activity</h2>
+                        <button class="view-all">View All</button>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-details">
+                                <p><strong>New User Registration</strong></p>
+                                <p>Sarah Johnson registered as a job seeker</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <!-- More activity items -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/frontend/assets/js/admin-dashboard.js"></script>
+</body>
+</html>
